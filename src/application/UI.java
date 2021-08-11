@@ -13,7 +13,7 @@ public class UI { //Interface do tabuleiro
             }
             System.out.println();
         }
-        System.out.println(" a b c d e f g h");
+        System.out.println("  a b c d e f g h ");
     }
 
     private static void printPiece(ChessPiece piece) {
@@ -21,7 +21,7 @@ public class UI { //Interface do tabuleiro
             System.out.print("-");
         }
         else {
-            System.out.println(piece);
+            System.out.print(piece);
         }
         System.out.print(" ");
     }

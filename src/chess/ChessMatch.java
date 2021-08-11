@@ -1,6 +1,10 @@
 package chess;
 
 import boardGame.Board;
+import boardGame.Position;
+import chess.pieces.King;
+import chess.pieces.Rook;
+import com.sun.media.sound.RIFFInvalidDataException;
 
 public class ChessMatch { //Tabuleiro de xadrez
 
@@ -8,6 +12,7 @@ public class ChessMatch { //Tabuleiro de xadrez
 
     public ChessMatch() {
         board = new Board(8, 8);
+        initialSetup(); //Adicionei este método ao construtor, para que o jogo ja comece com as peças no tabuleiro
     }
 
     public ChessPiece[][] getPieces() {
@@ -20,5 +25,10 @@ public class ChessMatch { //Tabuleiro de xadrez
         return mat;
     } //Vai me retornar uma matriz de peças de xadrez correspondentes a essa partida.
 
+    private void initialSetup() { //Vai iniciar a partida colocando as peças no tabuleiro
+        board.placePiece(new Rook(board, Color.WHITE), new Position(2, 1));
+        board.placePiece(new King(board, Color.BLACK), new Position(5, 3));
+        board.placePiece(new Rook(board, Color.WHITE), new Position(7, 2));
+    }
 
 }
