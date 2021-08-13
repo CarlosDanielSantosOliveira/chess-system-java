@@ -26,8 +26,8 @@ public class ChessMatch { //Tabuleiro de xadrez
     } //Vai me retornar uma matriz de peças de xadrez correspondentes a essa partida.
 
     private void initialSetup() { //Vai iniciar a partida colocando as peças no tabuleiro
-        board.placePiece(new Rook(board, Color.WHITE), new Position(2, 1));
-        board.placePiece(new King(board, Color.BLACK), new Position(5, 3));
+        board.placePiece(new Rook(board, Color.WHITE), new Position(5, 3));
+        board.placePiece(new King(board, Color.BLACK), new Position(5, 4));
         board.placePiece(new Rook(board, Color.WHITE), new Position(7, 2));
     }
 
