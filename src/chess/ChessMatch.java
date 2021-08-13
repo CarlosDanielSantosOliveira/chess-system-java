@@ -10,7 +10,7 @@ public class ChessMatch { //Tabuleiro de xadrez
 
     private Board board;
 
-    public ChessMatch() {
+    public ChessMatch() throws Exception {
         board = new Board(8, 8);
         initialSetup(); //Adicionei este método ao construtor, para que o jogo ja comece com as peças no tabuleiro
     }
@@ -25,10 +25,15 @@ public class ChessMatch { //Tabuleiro de xadrez
         return mat;
     } //Vai me retornar uma matriz de peças de xadrez correspondentes a essa partida.
 
-    private void initialSetup() { //Vai iniciar a partida colocando as peças no tabuleiro
-        board.placePiece(new Rook(board, Color.WHITE), new Position(5, 3));
-        board.placePiece(new King(board, Color.BLACK), new Position(5, 4));
-        board.placePiece(new Rook(board, Color.WHITE), new Position(7, 2));
+    private void placeNewPiece(char column, int row, ChessPiece piece) throws Exception {
+        board.placePiece(piece, new ChessPosition(column, row).toPosition());
+    }
+
+    private void initialSetup() throws Exception { //Vai iniciar a partida colocando as peças no tabuleiro
+        placeNewPiece('b', 6, new Rook(board, Color.WHITE));
+        placeNewPiece('c', 7, new King(board, Color.WHITE));
+        placeNewPiece('d', 8, new Rook(board, Color.WHITE));
+
     }
 
 }
