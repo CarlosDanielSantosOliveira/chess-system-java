@@ -6,6 +6,7 @@ import boardGame.Position;
 import chess.pieces.King;
 import chess.pieces.Rook;
 import com.sun.media.sound.RIFFInvalidDataException;
+import javafx.geometry.Pos;
 
 public class ChessMatch { //Tabuleiro de xadrez
 
@@ -30,6 +31,7 @@ public class ChessMatch { //Tabuleiro de xadrez
         Position source = sourcePosition.toPosition();
         Position target = targetPosition.toPosition();
         validateSourcePosition(source);
+        validateTargetPosition(source, target);
         Piece capturedPiece = makeMove(source, target);
         return (ChessPiece)  capturedPiece;
     }
@@ -47,6 +49,12 @@ public class ChessMatch { //Tabuleiro de xadrez
         }
         if (!board.piece(position).isThereAnyPossibleMove()) {
             throw new ChessException("There is no possible moves for the chosen piece");
+        }
+    }
+
+    private void validateTargetPosition(Position source, Position target) {
+        if (!board.piece(source).possibleMove(target)) {
+            throw new ChessException("The chosen piece can't move to targer position");
         }
     }
 
