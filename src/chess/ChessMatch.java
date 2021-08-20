@@ -8,11 +8,18 @@ import chess.pieces.Rook;
 import com.sun.media.sound.RIFFInvalidDataException;
 import javafx.geometry.Pos;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ChessMatch { //Tabuleiro de xadrez
 
     private int turn;
     private Color currentPlayer;
     private Board board;
+
+    private List<Piece> piecesOnTheBoard = new ArrayList<>();
+    private List<Piece> capturedPieces = new ArrayList<>();
+
 
     public ChessMatch() throws Exception {
         board = new Board(8, 8);
@@ -60,6 +67,11 @@ public class ChessMatch { //Tabuleiro de xadrez
         Piece p = board.removePiece(source);
         Piece capturedPiece = board.removePiece(target);
         board.placePiece(p, target);
+
+        if (capturedPiece != null) {
+            piecesOnTheBoard.remove(capturedPiece);
+            capturedPieces.add(capturedPiece);
+        }
         return capturedPiece;
     }
 
@@ -91,6 +103,7 @@ public class ChessMatch { //Tabuleiro de xadrez
 
     private void placeNewPiece(char column, int row, ChessPiece piece) throws Exception {
         board.placePiece(piece, new ChessPosition(column, row).toPosition());
+        piecesOnTheBoard.add(piece);
     }
 
     private void initialSetup() throws Exception { //Vai iniciar a partida colocando as peças no tabuleiro
