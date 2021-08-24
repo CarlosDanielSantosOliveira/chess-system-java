@@ -77,9 +77,10 @@ public class ChessMatch { //Tabuleiro de xadrez
 
         check = (testCheck(opponent(currentPlayer))) ? true: false;
 
-        if (testeCheckMate(opponent(currentPlayer))) {
+        if (testCheckMate(opponent(currentPlayer))) {
             checkMate = true;
-        } else {
+        }
+        else {
             nextTurn();
         }
         return (ChessPiece)  capturedPiece;
@@ -142,9 +143,8 @@ public class ChessMatch { //Tabuleiro de xadrez
 
     private ChessPiece king(Color color) {
         List<Piece> list = piecesOnTheBoard.stream().filter(x -> ((ChessPiece)x).getColor() == color).collect(Collectors.toList());
-
-        for (Piece p: list) {
-            if (p instanceof  King) {
+        for (Piece p : list) {
+            if (p instanceof King) {
                 return (ChessPiece)p;
             }
         }
@@ -154,8 +154,8 @@ public class ChessMatch { //Tabuleiro de xadrez
     private boolean testCheck(Color color) {
         Position kingPosition = king(color).getChessPosition().toPosition();
         List<Piece> opponentPieces = piecesOnTheBoard.stream().filter(x -> ((ChessPiece)x).getColor() == opponent(color)).collect(Collectors.toList());
-        for (Piece p: opponentPieces) {
-            boolean [][] mat = p.possibleMoves();
+        for (Piece p : opponentPieces) {
+            boolean[][] mat = p.possibleMoves();
             if (mat[kingPosition.getRow()][kingPosition.getColumn()]) {
                 return true;
             }
@@ -163,12 +163,12 @@ public class ChessMatch { //Tabuleiro de xadrez
         return false;
     }
 
-    public boolean testeCheckMate(Color color){
+    private boolean testCheckMate(Color color) {
         if (!testCheck(color)) {
             return false;
         }
-        List<Piece> list = piecesOnTheBoard.stream().filter(x -> ((ChessPiece)x).getColor() == opponent(color)).collect(Collectors.toList());
-        for (Piece p: list) {
+        List<Piece> list = piecesOnTheBoard.stream().filter(x -> ((ChessPiece)x).getColor() == color).collect(Collectors.toList());
+        for (Piece p : list) {
             boolean[][] mat = p.possibleMoves();
             for (int i=0; i<board.getRows(); i++) {
                 for (int j=0; j<board.getColumns(); j++) {
@@ -194,13 +194,12 @@ public class ChessMatch { //Tabuleiro de xadrez
     }
 
     private void initialSetup() throws Exception { //Vai iniciar a partida colocando as peças no tabuleiro
-            placeNewPiece('h', 7, new Rook(board, Color.WHITE));
-            placeNewPiece('d', 1, new Rook(board, Color.WHITE));
-            placeNewPiece('e', 1, new King(board, Color.WHITE));
+        placeNewPiece('h', 7, new Rook(board, Color.WHITE));
+        placeNewPiece('d', 1, new Rook(board, Color.WHITE));
+        placeNewPiece('e', 1, new King(board, Color.WHITE));
 
-
-            placeNewPiece('b', 8, new Rook(board, Color.BLACK));
-            placeNewPiece('a', 8, new Rook(board, Color.BLACK));
+        placeNewPiece('b', 8, new Rook(board, Color.BLACK));
+        placeNewPiece('a', 8, new King(board, Color.BLACK));
 
         }
     }

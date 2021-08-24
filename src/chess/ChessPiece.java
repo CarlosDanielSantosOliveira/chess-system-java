@@ -30,6 +30,8 @@ public abstract class ChessPiece extends Piece { //Peça de xadrez
         return p != null && p.getColor() != color;
     }
 
+    
+
 }
 
 
